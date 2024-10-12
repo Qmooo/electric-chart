@@ -8,12 +8,13 @@ import os
 from dotenv import load_dotenv
 
 load_dotenv()
-mongo_host = os.environ.get('MONGO_HOST', 'mongodb')
-mongo_port = os.environ.get('MONGO_PORT', '27017')
-mongo_username = os.environ.get('MONGO_USERNAME', 'admin')
-mongo_password = os.environ.get('MONGO_PASSWORD', 'password')
+mongo_host = os.environ.get('MONGO_HOST')
+mongo_port = os.environ.get('MONGO_PORT')
+mongo_username = os.environ.get('MONGO_USERNAME')
+mongo_password = os.environ.get('MONGO_PASSWORD')
 
 app = Flask(__name__)
+CORS(app)
 url = "http://59.127.49.50/"
 
 def get_electric_balance(Room, Phone):
@@ -64,5 +65,5 @@ def index():
     return render_template('index.html', data=data.json)
 
 if __name__ == "__main__":
-    app.run(host='0.0.0.0', port=30800, debug=True)
+    app.run(host='0.0.0.0', port=30800)
 

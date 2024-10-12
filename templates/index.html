@@ -9,6 +9,7 @@
 <body>
 	<h1>Electric Data</h1>
 	<canvas id="myChart" width="400" height="200"></canvas>
+	<h3 id="avgbalance"></h3>
 	<script>
 		var data = {{ data|tojson }};
 		var ctx = document.getElementById('myChart').getContext('2d');
@@ -19,6 +20,11 @@
 		var balances = data.map(function(e) {
 		   return parseFloat(e.edBalance);
 		});
+		
+		var balancesPer3Hour = balances[balances.length - 4] - balances[balances.length - 1];
+		balancesPer3Hour = balancesPer3Hour.toFixed(2);
+		avgbalance = document.getElementById('avgbalance');
+		avgbalance.innerHTML = 'Average Electric Balance per 3 hours: ' + balancesPer3Hour;
 
 		var myChart = new Chart(ctx, {
 			type: 'line',
