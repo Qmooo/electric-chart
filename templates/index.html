@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Electric Data</title>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+	<h1>Electric Data</h1>
+	<canvas id="myChart" width="400" height="200"></canvas>
+	<script>
+		var data = {{ data|tojson }};
+		var ctx = document.getElementById('myChart').getContext('2d');
+		
+		var labels = data.map(function(e) {
+		   return e.Time;
+		});
+		var balances = data.map(function(e) {
+		   return parseFloat(e.edBalance);
+		});
+
+		var myChart = new Chart(ctx, {
+			type: 'line',
+			data: {
+				labels: labels,
+				datasets: [{
+					label: 'Electric Balance',
+					data: balances,
+					borderColor: 'rgba(75, 192, 192, 1)',
+					borderWidth: 3
+				}]
+			},
+			options: {
+				scales: {
+					y: {
+						beginAtZero: true
+					}
+				}
+			}
+		});
+	</script>
+</body>
+</html>

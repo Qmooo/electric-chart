@@ -1,0 +1,7 @@
+flask
+flask-cors
+requests
+bs4
+apscheduler
+pymongo
+python-dotenv
